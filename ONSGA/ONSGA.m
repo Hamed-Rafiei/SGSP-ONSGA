@@ -26,10 +26,11 @@ classdef ONSGA < ALGORITHM
             %% Optimization
             while Algorithm.NotTerminated(Population)
                 MatingPool = TournamentSelection(2,Problem.N,sum(max(0,Population.cons),2));
-                Offspring  = OperatorIPSGA(Problem,Population(MatingPool));
+                Offspring  = OperatorOSGA(Problem,Population(MatingPool));
                 Zmin       = min([Zmin;Offspring(all(Offspring.cons<=0,2)).objs],[],1);
                 Population = EnvironmentalSelection([Population,Offspring],Problem.N,Z,Zmin);
             end
         end
     end
+
 end
